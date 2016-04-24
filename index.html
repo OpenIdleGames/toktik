@@ -1,0 +1,269 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charSet="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta name="description" content="Conceptual incremental game"/>
+        <meta name="keywords" content="toktik, incremental, clicker, game, fun, html5"/>
+        <title>TokTik</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"/>
+    <link href="main-b9bf80deee0faae7f899.css" rel="stylesheet"></head>
+    <body>
+        <div id="play-state" class="state">
+            <div class="grayout"></div>
+
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <ul class="tabs menu" data-tabs id="main-tabs">
+                        <li class="tabs-title is-active float-left" data-toggle="spells-dropdown">
+                            <a href="#spells" aria-selected="true">Spells</a>
+                        </li>
+                        <li class="tabs-title float-left" data-toggle="perks-dropdown">
+                            <a href="#perks">Perks</a>
+                        </li>
+                        <li class="tabs-title float-left" data-toggle="buildings-dropdown">
+                            <a href="#buildings">Buildings</a>
+                        </li>
+                        <li class="tabs-title float-left" data-toggle="heroes-dropdown">
+                            <a href="#heroes">Heroes</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="menu">
+                        <li class="menu-text float-right" data-toggle="meta-chrons-counter-dropdown">
+                            <span class="meta-chrons"></span>
+                            <span class="meta-chrons-counter">0</span>
+                        </li>
+                        <li class="menu-text float-right" data-toggle="eternal-chrons-counter-dropdown">
+                            <span class="eternal-chrons"></span>
+                            <span class="eternal-chrons-counter">0</span>
+                        </li>
+                        <li class="menu-text float-right" data-toggle="chrons-counter-dropdown">
+                            <span class="chrons"></span>
+                            <span class="chrons-counter">0</span>
+                        </li>
+                        <li class="menu-text float-right" data-toggle="pop-counter-dropdown">
+                            <span class="fi-torsos-all"></span>
+                            <span class="pop-counter">0</span>
+                        </li>
+                        <li class="menu-text float-right" data-toggle="extras-dropdown">
+                            extras
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dropdown-pane bottom" id="meta-chrons-counter-dropdown" data-dropdown>
+                Meta Chrons dropdown
+            </div>
+            <div class="dropdown-pane bottom" id="eternal-chrons-counter-dropdown" data-dropdown>
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="2">Eternal Chrons</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Available</th>
+                            <td><strong class="eternal-chrons-counter eternal-chrons"></strong></td>
+                        </tr>
+                        <tr>
+                            <th>Next prestige</th>
+                            <td>+<strong class="prestige-eternal-chrons-counter eternal-chrons"></strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="dropdown-pane bottom" id="chrons-counter-dropdown" data-dropdown>
+                Chrons dropdown
+            </div>
+            <div class="dropdown-pane bottom" id="pop-counter-dropdown" data-dropdown>
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="2">Population</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Available</th>
+                            <td><strong class="pop-counter"></strong> <span class="fi-torsos-all"></span></td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td><strong class="total-pop-counter"></strong> <span class="fi-torsos-all"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="dropdown-pane bottom" id="extras-dropdown" data-dropdown>
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="2">Extras</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                Timequake probability<br/>
+                                <em>probability that you will at least get 1 timequake during the game</em>
+                            </th>
+                            <td><strong class="timequake-probability-counter"></strong>%</td>
+                        </tr>
+                        <tr>
+                            <th>Chrons Cost Reduction</th>
+                            <td><strong class="cost-reduction-chrons-counter"></strong> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="outer-clock">
+                <div class="inner-clock"></div>
+            </div>
+
+            <div class="row">
+                <div class="queue-item template callout small secondary clearfix">
+                    <button class="button alert close-button float-right" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6 class="queue-item-meta float-right"></h6>
+                    <h6 class="queue-item-title"></h6>
+                    <div class="progress" role="progressbar">
+                        <span class="progress-meter">
+                            <p class="progress-meter-text"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="spell template column">
+                    <div class="button secondary expanded" data-action="push" data-equalizer-watch>
+                        <h5 class="tt-title"></h5>
+                        <p class="tt-legend"></p>
+                    </div>
+                    <div class="button-group">
+                        <a class="button tiny secondary" data-action="unshift">Queue (start)</a>
+                    </div>
+                </div>
+
+                <div class="perk template column">
+                    <div class="button secondary expanded" data-equalizer-watch>
+                        <h5 class="tt-title"></h5>
+                        <p class="tt-legend"></p>
+                    </div>
+                    <div class="button-group">
+                        <a class="button tiny secondary" data-action="unshift">Queue (start)</a>
+                    </div>
+                </div>
+
+                <div class="building template column">
+                    <div class="button secondary expanded" data-equalizer-watch>
+                        <div class="tt-level label secondary float-right">0</div>
+                        <h5 class="tt-title"></h5>
+                        <p class="tt-legend"></p>
+                    </div>
+                    <div class="button-group">
+                        <a class="button tiny secondary" data-action="unshift">Queue (start)</a>
+                    </div>
+                </div>
+
+                <div class="effects small-12 column">
+                    <ul class="effects-list"></ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="small-12 medium-3 large-2 column">
+                    <h6>Queue</h6>
+                    <div class="done-list row small-up-1"></div>
+                    <div class="in-progress-list row small-up-1"></div>
+                    <div class="queue-list row small-up-1"></div>
+                </div>
+
+                <div class="small-12 medium-9 large-10 column">
+                    <div class="tabs-content" data-tabs-content="main-tabs">
+                        <div class="tabs-panel is-active" id="spells">
+                            <div class="callout row" data-closable>
+                                <button class="close-button float-right" aria-label="Dismiss alert" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="content">
+                                    Spells are purchasable that provide a temporary effect in the current game.
+                                    (e.g: they are clear by prestige). Main providers of boosts.
+                                    Stackable instead of level-able, cost is not influenced by how
+                                    many are stacked.
+                                </div>
+                            </div>
+
+                            <div class="row small-up-1 medium-up-2 large-up-3" id="spells-list"
+                                 data-equalizer data-equalize-by-row="true">
+                            </div>
+                        </div>
+
+                        <div class="tabs-panel" id="perks">
+                            <div class="callout row" data-closable>
+                                <button class="close-button float-right" aria-label="Dismiss alert" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="content">
+                                    Perks unlock new spells / buildings / heroes or improve already
+                                    available spells / buildings / heroes.
+                                </div>
+                            </div>
+
+                            <div class="row small-up-1 medium-up-2 large-up-3" id="perks-list"
+                                 data-equalizer data-equalize-by-row="true">
+                            </div>
+                        </div>
+
+                        <div class="tabs-panel" id="buildings">
+                            <div class="callout row" data-closable>
+                                <button class="close-button float-right" aria-label="Dismiss alert" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="content">
+                                    Buildings are purchasable that provides ressources for the duration of a game.
+                                    They can trigger game-long effects. Main providers of ressources.
+                                    Level-able instead of stackable, cost is influenced by level.
+                                </div>
+                            </div>
+
+                            <div class="row small-up-1 medium-up-2 large-up-3" id="buildings-list"
+                                 data-equalizer data-equalize-by-row="true">
+                            </div>
+                        </div>
+
+                        <div class="tabs-panel" id="heroes">
+                            <div class="callout row" data-closable>
+                                <button class="close-button float-right" aria-label="Dismiss alert" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="content">
+                                    Heroes take 1 or more pop slots (thus limiting your ability to build concurrent
+                                    buildings or cast spells). They have unique effects mixing good and bad.
+                                </div>
+                            </div>
+
+                            <p>Coming soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+        <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+         ga('create', 'UA-74116738-2', 'auto');
+         ga('send', 'pageview');
+        </script>
+    <script src="main-b9bf80deee0faae7f899.js"></script></body>
+</html>
